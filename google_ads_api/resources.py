@@ -18,6 +18,8 @@ async def customers_search(session: aiohttp.ClientSession,
 
     response = await session.post(f'https://googleads.googleapis.com/{constants.API_VERSION}/customers/{customer_id}/googleAds:search',
                         data=json.dumps(data))
+    response.raise_for_status()
+
     return await response.json()
 
 
@@ -30,6 +32,7 @@ async def campaigns_mutate(session: aiohttp.ClientSession,
 
     response = await session.post(f'https://googleads.googleapis.com/{constants.API_VERSION}/customers/{customer_id}/campaigns:mutate',
                                   data=json.dumps(data))
+    response.raise_for_status()
 
     return await response.json()
 
@@ -43,6 +46,7 @@ async def campaign_budgets_mutate(session: aiohttp.ClientSession,
 
     response = await session.post(f'https://googleads.googleapis.com/{constants.API_VERSION}/customers/{customer_id}/campaignBudgets:mutate',
                                   data=json.dumps(data))
+    response.raise_for_status()
 
     return await response.json()
 
