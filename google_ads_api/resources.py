@@ -28,10 +28,13 @@ async def campaigns_mutate(session: aiohttp.ClientSession,
                            operations: typing.List):
     """Mutate campaigns"""
 
-    data = {'operations':operations}
+    data = {'operations':operations,
+            'responseContentType': 'MUTABLE_RESOURCE'}
 
     response = await session.post(f'https://googleads.googleapis.com/{constants.API_VERSION}/customers/{customer_id}/campaigns:mutate',
                                   data=json.dumps(data))
+    if not response.ok:
+        print(await response.text())
     response.raise_for_status()
 
     return await response.json()
@@ -42,7 +45,8 @@ async def campaign_budgets_mutate(session: aiohttp.ClientSession,
                            operations: typing.List):
     """Mutate campaign budgets"""
 
-    data = {'operations':operations}
+    data = {'operations':operations,
+            'responseContentType': 'MUTABLE_RESOURCE'}
 
     response = await session.post(f'https://googleads.googleapis.com/{constants.API_VERSION}/customers/{customer_id}/campaignBudgets:mutate',
                                   data=json.dumps(data))
