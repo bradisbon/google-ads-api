@@ -25,12 +25,9 @@ def refresh_token():
     return r.json()['access_token']
 
 
-ACCESS_TOKEN = refresh_token()
-
-
 class SessionManager():
     def __init__(self):
-        self.access_token = ACCESS_TOKEN
+        self.access_token = refresh_token()
         self.dev_token = load_credentials()['adwords']['developer_token']
         self._http_session: aiohttp.ClientSession
 
