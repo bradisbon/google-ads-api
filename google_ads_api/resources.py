@@ -58,6 +58,6 @@ async def campaign_budgets_mutate(session: aiohttp.ClientSession,
 async def list_customers(session: aiohttp.ClientSession) -> typing.Dict[str,str]:
     """Fetch a dict of customers and ids"""
 
-    response = await customers_search(session, constants.MCC_ID, "SELECT customer_client.id, customer_client.descriptive_name FROM customer_client WHERE customer_client.status = 'ENABLED'")
+    response = await customers_search(session, constants.MCC_ID, "SELECT customer_client.id, customer_client.descriptive_name FROM customer_client WHERE customer_client.status = 'ENABLED' AND customer_client.manager = FALSE")
     return {c['customerClient']['descriptiveName']:c['customerClient']['id'] for c in response['results']}
 
