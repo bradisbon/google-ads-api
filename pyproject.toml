@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "google-ads-api"
-version = "4.0.0"
+version = "5.0.0"
 description = "API Client for Google Ads API"
 authors = ["bradi <bradisbon@gmail.com>"]
 
